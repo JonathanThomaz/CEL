@@ -11,10 +11,19 @@ package model;
  */
 public class Email {
     private String remetente;
+    private String autenticacao;
     private String destinatario;
     private String assunto;
     private String assinatura;
     private String corpo;
+
+    public String getAutenticacao() {
+        return autenticacao;
+    }
+
+    public void setAutenticacao(String autenticacao) {
+        this.autenticacao = autenticacao;
+    }
 
     public String getRemetente() {
         return remetente;
