@@ -12,7 +12,25 @@ package model;
 public class Usuario {
    private String nome;
    private String email;
+   private String senha;
+   private String funcao;
    private String telefone;
+
+    public String getFuncao() {
+        return funcao;
+    }
+
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public String getNome() {
         return nome;
