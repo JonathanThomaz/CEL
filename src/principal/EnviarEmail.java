@@ -5,6 +5,9 @@
  */
 package principal;
 
+import model.Conexao;
+import model.Email;
+
 /**
  *
  * @author admin
@@ -41,7 +44,7 @@ public class EnviarEmail extends javax.swing.JFrame {
         destinatario = new javax.swing.JTextField();
         assunto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        email = new javax.swing.JTextArea();
+        corpo = new javax.swing.JTextArea();
         enviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,9 +74,9 @@ public class EnviarEmail extends javax.swing.JFrame {
 
         destinatario.setText("destinario1@exemple.com, destinario2@exemple.com, destinario3@exemple.com");
 
-        email.setColumns(20);
-        email.setRows(5);
-        jScrollPane1.setViewportView(email);
+        corpo.setColumns(20);
+        corpo.setRows(5);
+        jScrollPane1.setViewportView(corpo);
 
         enviar.setText("Enviar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +175,21 @@ public class EnviarEmail extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
+
+        Conexao conexao = new Conexao();
+        Email email = new Email();
         
+        email.setRemetente(remetente.getText());
+        String pass = new String(autenticacao.getPassword()).trim();
+        email.setAssunto(assunto.getText());
+        email.setAutenticacao(pass);
+        email.setDestinatario(destinatario.getText());
+        email.setCorpo(corpo.getText());
+        
+        conexao.setEmail(email);
+        conexao.setSmtpServer(smtpServer.getText());
+        conexao.setSmtpPort(smtpPort.getText());
+        conexao.enviarEmail();
         
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -216,10 +233,10 @@ public class EnviarEmail extends javax.swing.JFrame {
     private javax.swing.JLabel assuntoLabel;
     private javax.swing.JPasswordField autenticacao;
     private javax.swing.JLabel autenticacaoLabel;
+    private javax.swing.JTextArea corpo;
     private javax.swing.JLabel corpoLabel;
     private javax.swing.JLabel destinarioLabel;
     private javax.swing.JTextField destinatario;
-    private javax.swing.JTextArea email;
     private javax.swing.JButton enviar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField remetente;
