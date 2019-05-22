@@ -64,15 +64,9 @@ public class EnviarEmail extends javax.swing.JFrame {
 
         corpoLabel.setText("Email:");
 
-        smtpServer.setText("smtp.exemple.com");
-
         smtpPort.setText("465");
 
-        remetente.setText("remetente@exemple.com");
-
         autenticacao.setText("jPasswordField1");
-
-        destinatario.setText("destinario1@exemple.com, destinario2@exemple.com, destinario3@exemple.com");
 
         corpo.setColumns(20);
         corpo.setRows(5);
@@ -180,6 +174,7 @@ public class EnviarEmail extends javax.swing.JFrame {
         Email email = new Email();
         
         email.setRemetente(remetente.getText());
+        System.out.println(remetente.getText());
         String pass = new String(autenticacao.getPassword()).trim();
         email.setAssunto(assunto.getText());
         email.setAutenticacao(pass);

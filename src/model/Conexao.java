@@ -20,11 +20,14 @@ import javax.mail.internet.MimeMessage;
  * @author admin
  */
 public class Conexao {
+
     private String servidor;
     private String porta;
     private String smtpServer;
     private String smtpPort;
     private Email email;
+    final String username = "jonathanthomaz96@gmail.com";
+    final String password = "FutbolNathan1256";
 
     public Email getEmail() {
         return email;
@@ -65,50 +68,53 @@ public class Conexao {
     public void setSmtpPort(String smtpPort) {
         this.smtpPort = smtpPort;
     }
-    
-    
-    public void enviarEmail(){
+
+    public void enviarEmail() {
         Properties props = new Properties();
-            /** Parâmetros de conexão com servidor */
-            props.put("mail.smtp.host", smtpServer);
-            props.put("mail.smtp.socketFactory.port", smtpPort);
-            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", smtpPort);
+        /**
+         * Parâmetros de conexão com servidor
+         */
+        props.put("mail.smtp.host", smtpServer);
+        props.put("mail.smtp.socketFactory.port", smtpPort);
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", smtpPort);
 
         Session session;
         session = Session.getDefaultInstance(props,
-        new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication()
-               {
-                    return new PasswordAuthentication(email.getRemetente(), email.getAutenticacao());
-               }
-            });
- 
-        /** Ativa Debug para sessão */
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username,password);
+                    }
+                });
+        System.out.println(email.getRemetente());
+        /**
+         * Ativa Debug para sessão
+         */
         session.setDebug(true);
- 
+
         try {
- 
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(email.getRemetente())); //Remetente
- 
-                  Address[] toUser = InternetAddress //Destinatário(s)
-                             .parse(email.getRemetente());  
- 
-                  message.setRecipients(Message.RecipientType.TO, toUser);
-                  message.setSubject(email.getAssunto());//Assunto
-                  message.setText(email.getCorpo());
-                  /**Método para enviar a mensagem criada*/
-                  Transport.send(message);
- 
-                  System.out.println("Feito!!!");
- 
-             } catch (MessagingException e) {
-                  throw new RuntimeException(e);
-            }
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username)); //Remetente
+
+            Address[] toUser = InternetAddress //Destinatário(s)
+                    .parse(username);
+
+            message.setRecipients(Message.RecipientType.TO, toUser);
+            message.setSubject(email.getAssunto());//Assunto
+            message.setText(email.getCorpo());
+            /**
+             * Método para enviar a mensagem criada
+             */
+            Transport.send(message);
+
+            System.out.println("Feito!!!");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
-    
-    
+
 }
