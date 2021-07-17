@@ -27,7 +27,7 @@ public class Conexao {
     private String smtpPort;
     private Email email;
     final String username = "jonathanthomaz96@gmail.com";
-    final String password = "FutbolNathan1256";
+    final String password = "";
 
     public Email getEmail() {
         return email;
